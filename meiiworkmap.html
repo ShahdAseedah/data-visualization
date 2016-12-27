@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<body>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://d3js.org/topojson.v1.min.js"></script>
+  <!-- I recommend you host this file on your own, since this will change without warning -->
+  <script src="http://datamaps.github.io/scripts/datamaps.world.min.js?v=1"></script>
+  <h2>Datamaps for MEII work areas and Partners</h2>
+  
+  <div id="container1" style="position: relative; width: 80%; max-height: 450px;"></div>
+ 
+     
+     <script>
+       //basic map config with custom fills, mercator projection
+      var map = new Datamap({
+        scope: 'world',
+        element: document.getElementById('container1'),
+        projection: 'mercator',
+        height: 500,
+        fills: {
+          defaultFill: '#3a4c75',
+          lt50: 'rgba(0,244,244,0.9)',
+          gt50: 'red'
+        },
+        
+        data: {
+          USA: {fillKey: 'lt50' },
+          SWE: {fillKey: 'lt50' },
+          JOR: {fillKey: 'gt50' },
+          ISR: {fillKey: 'gt50'},
+         
+          TUN: {fillKey: 'gt50' }       
+        }
+      })
+      
+      
+             
+      
+       //bubbles, custom popup on hover template
+     map.bubbles([
+       //{name: 'huge work', latitude: 31.9522, longitude: 35.2332, radius: 10, fillKey: ''},
+       {name: 'US office', latitude: 37.0902, longitude: -95.7129, radius: 18, fillKey: 'gt50'},
+       
+
+     ], {
+       popupTemplate: function(geo, data) {
+         return "<div class='hoverinfo'>It is " + data.name + "</div>";
+       }
+     });
+     </script>
+</body>
